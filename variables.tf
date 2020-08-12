@@ -1,5 +1,5 @@
 variable "tenant_id" {
-  default = "0e3e2e88-8caf-41ca-b4da-e3b33b6c52ec"
+  default = ""
 }
 
 variable "key_name" {
