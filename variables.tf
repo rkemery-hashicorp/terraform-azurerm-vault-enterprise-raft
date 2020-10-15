@@ -32,7 +32,7 @@ variable "appgw_subnet_prefixes" {
 }
 
 variable "source_prefix" {
-  default = "184.17.68.160/32"
+  default = ""
 }
 
 variable "instance_count" {
