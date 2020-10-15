@@ -1,10 +1,10 @@
 data "template_file" "setup" {
-  template = "${file("${path.module}/templates/setup.tpl")}"
+  template = file("${path.module}/templates/setup.tpl")
 
     vars = {
     # resource_group_name = azurerm_resource_group.vault.name
     # vm_name             = element(azurerm_linux_virtual_machine.vault.*.name, count.index)
-      vault_download_url  = "${var.vault_download_url}"
+      vault_download_url  = var.vault_download_url
     # tenant_id           = "${var.tenant_id}"
     # subscription_id     = "${var.subscription_id}"
     # client_id           = "${var.client_id}"
@@ -17,7 +17,7 @@ data "template_file" "setup" {
 resource "azurerm_linux_virtual_machine" "vault" {
   name                  = "${var.environment}-${random_id.vm.hex}-${count.index}-vm"
   count                 = var.instance_count
-  custom_data           = base64encode("${data.template_file.setup.rendered}")
+  custom_data           = base64encode(data.template_file.setup.rendered)
   location              = var.location
   resource_group_name   = azurerm_resource_group.vault.name
   size                  = var.vm_size
